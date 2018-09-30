@@ -38,6 +38,7 @@ public class FireworkDisplay extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
 		buttonPanel = new JPanel();
+		window.setBackground(Color.BLUE);
 		squirtButton = new JButton("FIRE");
 		squirtButton.addActionListener((e)->{
 			fire();
