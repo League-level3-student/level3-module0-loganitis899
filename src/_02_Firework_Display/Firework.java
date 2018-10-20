@@ -12,74 +12,82 @@ import java.util.Random;
  *
  */
 
-public class Firework{
+public class Firework {
 	public static final int GRAVITY = 1;
-	
-	//1. Create an array of Spark objects called sparks. Don't initialize it.
+
+	// 1. Create an array of Spark objects called sparks. Don't initialize it.
 	Spark[] sparks;
 	public boolean dead = false;
-	
-	public Firework() {
-		//2. Initialize the Spark array to contain 100 Sparks. 
-sparks = new Spark[100];
-		
-		//3. Iterate through the sparks and initialize each one to a new Spark.
-for(Spark s: sparks) {
-	 s = new Spark(Window.WIDTH/2, Window.HEIGHT );
-}
-		//   Make each spark start at the middle bottom of the screen.
-	
-	}
-	
-	public void launch() {
-		//4. Iterate through the sparks and reset their x and y location
-		//   to their original starting point.
-		for(Spark s: sparks) {
-			s.x=Window.WIDTH/2;
-			s.y=Window.HEIGHT;
-			
-		}
-	}
-	
-	public void updateSparks() {
-		//8. Uncomment this code. See if you can understand what it is doing.
-		
-	for(int i = 0; i < sparks.length; i++) {
 
-		Spark s = sparks[i];
-		s.x += s.xVelocity;
-		s.y += s.yVelocity;
-		s.yVelocity += GRAVITY;
-		
-		if(s.yVelocity >= 0 && !s.fire) {
-				Random r = new Random();
-			s.xVelocity = r.nextInt(40) - 20;
-			s.yVelocity += -r.nextInt(10) - 5;
-		s.size = r.nextInt(7) + 2;
-		s.fire = true;
+	public Firework() {
+		// 2. Initialize the Spark array to contain 100 Sparks.
+		sparks = new Spark[100];
+		for(int o=0; o<100; o++) {
+		sparks[o]=new Spark(FireworkDisplay.WIDTH/2, FireworkDisplay.HEIGHT);
+		System.out.println(FireworkDisplay.WIDTH);
 		}
-			
-		if(s.y >= FireworkDisplay.HEIGHT) {
-			s.dead = true;
+
+		// 3. Iterate through the sparks and initialize each one to a new Spark.
+		
+		// Make each spark start at the middle bottom of the screen.
+
+	}
+
+	public void launch() {
+		// 4. Iterate through the sparks and reset their x and y location
+		// to their original starting point.
+		for (Spark s : sparks) {
+			s.x = FireworkDisplay.WIDTH / 2;
+			s.y = FireworkDisplay.HEIGHT;
+
 		}
 	}
-		
-		for(int i = 0; i < sparks.length; i++) {
-	if(!sparks[i].dead) {
-			dead = false;
+
+	public void updateSparks() {
+		// 8. Uncomment this code. See if you can understand what it is doing.
+
+		for (int i = 0; i < sparks.length; i++) {
+
+			Spark s = sparks[i];
+			s.x += s.xVelocity;
+			s.y += s.yVelocity;
+			s.yVelocity += GRAVITY;
+
+			if (s.yVelocity >= 0 && !s.fire) {
+				Random r = new Random();
+				s.xVelocity = r.nextInt(40) - 20;
+				s.yVelocity += -r.nextInt(10) - 5;
+				s.size = r.nextInt(7) + 2;
+				s.fire = true;
+			}
+
+			if (s.y >= FireworkDisplay.HEIGHT) {
+				s.dead = true;
+			}
+		}
+
+		for (int i = 0; i < sparks.length; i++) {
+			if (!sparks[i].dead) {
+				dead = false;
 				break;
 			}
 			dead = true;
 		}
 	}
-	
+
 	public void drawSparks(Graphics g) {
-		//5. Iterate through each spark
-		for(Spark s : sparks) {
-			g.setColor(Color.BLUE);
-			g.fillOval(s.x, s.y, 2, 2);
+		// 5. Iterate through each spark
+		for (Spark s : sparks) {
+			Random Randy = new Random();
+			int randy = Randy.nextInt(255);
+			int rondy = Randy.nextInt(255);
+			int Rcndy = Randy.nextInt(255);
+			Color color = new Color(randy, rondy, Rcndy);
+			g.setColor(color);
+			
+			g.fillOval(s.x, s.y, randy, rondy);
 		}
-			//6. Set the color to the spark's color with g.setColor()
-			//7. Fill in an oval using the spark's x, y, and size with g.fillOval()
+		// 6. Set the color to the spark's color with g.setColor()
+		// 7. Fill in an oval using the spark's x, y, and size with g.fillOval()
 	}
 }
